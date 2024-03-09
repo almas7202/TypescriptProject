@@ -1,0 +1,30 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  margin-left: 1%;
+  margin-top: 1%;
+}
+
+form {
+  color: white;
+  border: 10px solid aliceblue;
+  padding-left: 10px;
+  padding-top: 10px;
+  background-color: aliceblue;
+  width: 35%;
+  height: 770px;
+}
+
+label {
+  z-index: 2;
+  color: black;
+  font-weight: bold;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  background-color: aliceblue;
+}
