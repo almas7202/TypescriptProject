@@ -42,24 +42,24 @@ let array = [{
     "Free Slot": "Sunday 2 pm",
 },
 {
-    "Name": "Arun",
+    "Name": "Jaimin",
     "Age": 24,
     "Experience": "2 years",
-    "Expertise": "Leg Exercise",
+    "Expertise": "Squat",
     "Free Slot": "Monday 2 pm",
 },
 {
-    "Name": "Rahul",
+    "Name": "Prakash",
     "Age": 22,
     "Experience": "1.5 years",
-    "Expertise": "Chest Exercise",
+    "Expertise": "Lungs Exercise",
     "Free Slot": "Sunday 10 am",
 },
 {
-    "Name": "Pankaj",
+    "Name": "Sahil",
     "Age": 26,
     "Experience": "2.5 years",
-    "Expertise": "Weight Gain Exercise",
+    "Expertise": "Weight loss Exercise",
     "Free Slot": "Sunday 2 pm",
 }]
 
@@ -94,6 +94,7 @@ for (var i in array) {
     let button = document.createElement("button")
     button.className = 'btn btn-outline-secondary'
     button.innerHTML = "Book Slot"
+    button.onclick = () => { }
     card.appendChild(button)
 
     button.onclick = () => {
@@ -104,14 +105,14 @@ for (var i in array) {
 
     let trainer = new LoginTrainer(array[i].Name, array[i].Age, array[i].Experience, array[i].Expertise, array[i]["Free Slot"])
     let arr = [];
-    if (localStorage.getItem('data')) {
-        arr = JSON.parse(localStorage.getItem('data'));
+    if (localStorage.getItem('data1')) {
+        arr = JSON.parse(localStorage.getItem('data1'));
         arr.push(trainer);
-        localStorage.setItem('data', JSON.stringify(arr));
+        localStorage.setItem('data1', JSON.stringify(arr));
     }
     else {
         arr.push(trainer);
-        localStorage.setItem('data', JSON.stringify(arr));
+        localStorage.setItem('data1', JSON.stringify(arr));
     }
 }
 

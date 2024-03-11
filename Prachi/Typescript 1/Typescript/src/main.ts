@@ -42,24 +42,24 @@ let arr = [{
     "Free Slot": "Sunday 2pm",
 },
 {
-    "Name": "Arun",
+    "Name": "Jaimin",
     "Age": 24,
     "Experience": "2 years",
-    "Expertise": "Leg Exercise",
+    "Expertise": "Squat",
     "Free Slot": "Monday 2pm",
 },
 {
-    "Name": "Rahul",
+    "Name": "Prakash",
     "Age": 22,
     "Experience": "1.5 years",
-    "Expertise": "Chest Exercise",
+    "Expertise": "Lungs Exercise",
     "Free Slot": "Sunday 10am",
 },
 {
-    "Name": "Pankaj",
+    "Name": "Sahil",
     "Age": 26,
     "Experience": "2.5 years",
-    "Expertise": "Weight Gain Exercise",
+    "Expertise": "Weight loss Exercise",
     "Free Slot": "Sunday 2pm",
 }]
 
