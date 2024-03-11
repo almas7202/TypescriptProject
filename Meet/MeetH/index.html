@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <form class="login">
+      <p class="title">Log in</p>
+      <input type="text" placeholder="Roll No" id="rollno" required>
+      <span id="errRollno" style="color: red;"></span>
+      <input type="email" placeholder="Email" required name="email" id="email">
+      <span id="errEmail" style="color: red;"></span>
+      <!-- <i class="fa fa-user"></i> -->
+      <input type="password" placeholder="Password" required name="password" id="pwd">
+      <span id="errPwd" style="color: red;"></span>
+      <!-- <i class="fa fa-key"></i> -->
+      <button type="button" id="btnLogin">
+        <!-- <i class="spinner"></i> -->
+        <span class="state">Log in</span>
+      </button>
+    </form>
+    <footer>
+      <p>
+        Don't have account? <a href="./signup.html">create an account</a>
+      </p>
+    </footer>
+    <div>
+      <span id="err" style="color: red;"></span>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+  <!-- <script type="module" src="./src/signup.ts"></script> -->
+</body>
+
+</html>

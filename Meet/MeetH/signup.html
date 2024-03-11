@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <form class="login">
+            <p class="title">Sign Up</p>
+            <input type="number" placeholder="Roll Number" required name="rollNumber" id="rollno"><br>
+            <span id="errRollno" style="color: red;"></span>
+            <!-- <i class="fa fa-user"></i> -->
+            <input type="email" placeholder="Email" required name="email" id="email"><br>
+            <span id="errEmail" style="color: red;"></span>
+            <!-- <i class="fa fa-key"></i> -->
+            <input type="password" placeholder="Password" required name="password" id="pwd"><br>
+            <span id="errPwd" style="color: red;"></span>
+            <!-- <i class="fa fa-key"></i> -->
+    
+            <button id="btnSignup" type="button">
+                <!-- <i class="spinner"></i> -->
+                <span class="state">Sign Up</span>
+            </button>
+        </form>
+        <footer>
+            <p>Already have account? <a href="./index.html">Login</a></p>
+
+        </footer>
+        <div>
+            <span id="err" style="color: red;"></span>
+        </div>
+    </div> 
+    <script type="module" src="./src/signup.ts"></script>
+</body>
+</html>
+
