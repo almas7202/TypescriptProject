@@ -115,13 +115,15 @@
                   </div>
                   
                   <div id="productForm" style="display: none; width: 90%;">
-                    <form>
-                      <div class="mb-3">
+                    <form id="myForm">
+                      <!-- <div class="mb-3">
                         <select class="form-select mt-3" id="category" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
+                            <option value="Open this select menu" selected>Open this select menu</option>
                             <option value="Boys">Boys</option>
                             <option value="Girls">Girls</option>
                           </select>
+                        <span id="categoryValidation"></span>
+                        
                       </div>
                       <div class="mb-3">
                         <label for="formFile" class="form-label">Default file input example</label>
@@ -138,7 +140,37 @@
                       <div class="mb-3">
                         <label for="productName" class="form-label">Product Qty</label>
                         <input type="text" class="form-control" id="productQty">
-                      </div>
+                      </div> -->
+
+                      <select style="margin-top: 20px; width: 50%;" id="category">
+                        <option></option>
+                        <option value="Boys">Boys</option>
+                        <option value="Girls">Girls</option>
+                      </select>
+                      <span id="categoryvalidation"></span>
+                       <br>
+
+
+                      <label for="ProductImage">ProductImage</label>
+                      <input type="file" id="productimg" id="productimg">
+                      <span id="imgvalidation"></span>
+                      <br>
+
+                      <label for="productName">ProductName</label>
+                      <input type="text" id="productName">
+                      <span id="namevalidation"></span>
+                      <br>
+
+                      <label for="productPrice">ProductPrice</label>
+                      <input type="number" id="productprice" >
+                      <span id="pricevalidation"></span>
+                      <br>
+
+                      <label for="productPrice">ProductQty</label>
+                      <input type="number" id="productQty" >
+                      <span id="Qtyvalidation"></span>
+                      <br>
+
                       <!-- Add more form fields as needed -->
                       <button type="submit" id="addproductbtn" class="btn btn-primary">Add Product</button>
                     </form>

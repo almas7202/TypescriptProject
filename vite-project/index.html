@@ -34,16 +34,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <input type="text" class="form-control mt-2" id="floatingInput" placeholder="username">
-                   
-                    <input type="email" class="form-control mt-2" id="floatingInput" placeholder="email">
-             
-                    <input type="text" class="form-control mt-2" id="floatingInput" placeholder="password">
-           
+                    <input type="text" class="form-control mt-2" id="username" placeholder="username">
+                    <span class="form-text text-muted" id="validuser"></span>
+                    <input type="email" class="form-control mt-2" id="email" placeholder="email">
+                    <span class="form-text text-muted" id="validemail"></span>
+                    <input type="text" class="form-control mt-2" id="password" placeholder="password">
+                    <span class="form-text text-muted" id="validpassword"></span>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" id="btnRegister" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
               </div>
@@ -66,21 +66,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <input type="text" class="form-control mt-2" id="floatingInput" placeholder="username">
-                   
-        
-             
-                    <input type="text" class="form-control mt-2" id="floatingInput" placeholder="password">
-           
+                    <input type="text" class="form-control mt-2" id="loginuser" placeholder="username">
+                    <span class="form-text text-muted" id="validuserlogin"></span>
+                    <input type="text" class="form-control mt-2" id="loginpassword" placeholder="password">
+                    <span class="form-text text-muted" id="validuserpassword"></span>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" id="btnlogin" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
               </div>
             </div>
-            <button type="button" id="btn" class="btn btn-outline-info">
+            <button type="button" id="btnlogout" class="btn btn-outline-info">
               Logout
             </button>
           </div>
