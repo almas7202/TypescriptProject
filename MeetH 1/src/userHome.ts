@@ -42,7 +42,6 @@ $(document).ready(function () {
             if (valueString) {
                 student = JSON.parse(valueString)
             }
-            console.log(student[0].rollno);
 
             let arr2 = [];
             $("#btnSubmit").click(function () {
@@ -65,6 +64,8 @@ $(document).ready(function () {
                         id = keys[j]
                     }
                 }
+                console.log(id);
+                
                 let valid = true;
                 for(let k = 0; k<student.length; k++){
                     if(id == student[k].rollno){
@@ -85,9 +86,11 @@ $(document).ready(function () {
     
                     localStorage.setItem("attendence", JSON.stringify(student));
                     localStorage.removeItem(String(id))
+                    alert("Your Attendence submitted successfully!!")
                 }
                 else{
                     $("#err").text("You already gave attendence today!!")
+                    localStorage.removeItem(String(id))
                 }
 
 

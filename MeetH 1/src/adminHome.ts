@@ -9,12 +9,9 @@ $(document).ready(function(){
     for(let i = 0; i<keys.length; i++){
         if(keys[i] == date){
             let value = JSON.parse(String(localStorage.getItem(keys[i]))); 
-            
-            
             let arr=[]
             for(let j in value){
                 arr.push(j);
-                
             }
             let arr1 = [];
             arr1.push(value.breakfast);

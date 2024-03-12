@@ -54,8 +54,7 @@ $(document).ready(function () {
       if (valid) {
         student.push(signupObj);
         localStorage.setItem("user", JSON.stringify(student));
-        localStorage.setItem(signupObj.rollno, JSON.stringify(signupObj))
-        window.location.href = "../UserControls/userHome.html";
+        window.location.href = "../index.html";
       }
     }
 

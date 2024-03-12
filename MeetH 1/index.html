@@ -11,19 +11,20 @@
 </head>
 
 <body>
+ 
   <div class="wrapper">
+    <div id="heading">
+      <h1 style="color: red;">College Canteen Management System</h1>
+    </div>
     <form class="login">
       <p class="title">Log in</p>
       <input type="text" placeholder="Roll No" id="rollno" required>
       <span id="errRollno" style="color: red;"></span>
       <input type="email" placeholder="Email" required name="email" id="email">
       <span id="errEmail" style="color: red;"></span>
-      <!-- <i class="fa fa-user"></i> -->
       <input type="password" placeholder="Password" required name="password" id="pwd">
       <span id="errPwd" style="color: red;"></span>
-      <!-- <i class="fa fa-key"></i> -->
       <button type="button" id="btnLogin">
-        <!-- <i class="spinner"></i> -->
         <span class="state">Log in</span>
       </button>
     </form>
@@ -37,7 +38,6 @@
     </div>
   </div>
   <script type="module" src="/src/main.ts"></script>
-  <!-- <script type="module" src="./src/signup.ts"></script> -->
 </body>
 
 </html>
