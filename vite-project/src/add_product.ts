@@ -65,6 +65,7 @@ function product_info() {
 
         if (product_categoty == "") {
             const product_category_validation: any = (<HTMLInputElement>document.getElementById('categoryvalidation'))
+            product_category_validation.style.color ="Red"
             product_category_validation.innerHTML = 'please select the Category'
         } else {
             const product_category_validation: any = (<HTMLInputElement>document.getElementById('categoryvalidation'))
@@ -73,6 +74,7 @@ function product_info() {
 
         if (product_name == "") {
             const product_name_validation: any = (<HTMLInputElement>document.getElementById('namevalidation'))
+            product_name_validation.style.color ="Red"
             product_name_validation.innerHTML = 'please Enter Name'
         } else {
             const product_name_validation: any = (<HTMLInputElement>document.getElementById('namevalidation'))
@@ -81,6 +83,7 @@ function product_info() {
 
         if (isNaN(product_price)) {
             const product_price_validation: any = (<HTMLInputElement>document.getElementById('pricevalidation'))
+            product_price_validation.style.color ="Red"
             product_price_validation.innerHTML = 'please enter price'
         } else {
             const product_name_validation: any = (<HTMLInputElement>document.getElementById('pricevalidation'))
@@ -89,6 +92,7 @@ function product_info() {
 
         if (isNaN(product_qty)) {
             const product_qty_validation: any = (<HTMLInputElement>document.getElementById('Qtyvalidation'))
+            product_qty_validation.style.color ="Red"
             product_qty_validation.innerHTML = 'please enter Qty'
         } else {
             const product_qty_validation: any = (<HTMLInputElement>document.getElementById('Qtyvalidation'))
@@ -140,7 +144,7 @@ function product_info() {
         localStorage.setItem('last_productId', last_productId.toString());
 
 
-        document.getElementById('myForm').onreset()
+       
     });
 
     function show_data(): void {
@@ -175,12 +179,17 @@ function product_info() {
                 let qty: any = document.createElement('td');
                 qty.textContent = product.product_qty;
 
+                let updatebtn:any = document.createElement('button')
+                updatebtn.setAttribute('class','btn btn-primary')
+                updatebtn.textContent = 'update Details'
+
                 tr?.append(id);
                 tr?.append(category);
                 tr?.append(img); // Append img to the table row
                 tr?.append(name);
                 tr?.append(price);
                 tr?.append(qty);
+                tr?.append(updatebtn)
                 tbody?.append(tr);
             }
         }

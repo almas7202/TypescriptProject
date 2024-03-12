@@ -68,14 +68,7 @@ function make_invoice() {
                 text.textContent = `Price: ${product.product_price}, Available Quantity: ${product.product_qty}`;
                 cardBodyDiv.appendChild(text);
 
-
-                // const qty = document.createElement('input');
-                // qty.setAttribute('type','number')
-                // qty.setAttribute('class','form-control')
-                // qty.setAttribute('style','width:70px')
-                // qty.setAttribute('id','inputQtyid');
-                // cardBodyDiv.appendChild(qty)
-
+        
                 // Create add to invoice button
                 const addToInvoiceBtn = document.createElement('button');
                 const uniqueId = `invoicebtn${product.product_id}`;
@@ -87,10 +80,7 @@ function make_invoice() {
                     console.log(product.product_qty);
                     const { product_id, product_name, product_price, product_img } = product;
                     invoiceArray.push({ product_id, product_name, product_price, product_img });
-                    console.log("Product added to invoice:", { product_id, product_name, product_price, product_img });
-                    const items:any =localStorage.setItem('Add-to-invoice',JSON.stringify(invoiceArray))
-                    console.log(items);
-                    
+                    console.log("Product added to invoice:", { product_id, product_name, product_price, product_img });                
                     invoiceCardgenerated(invoiceArray)
 
                 });
@@ -115,21 +105,23 @@ function make_invoice() {
     btninvoicebtn.innerHTML = "Get Invoice";
     btninvoicebtn.setAttribute('class', 'btn btn-primary');
     btninvoicebtn.setAttribute('style', 'width:50%');
+    btninvoicebtn.setAttribute('style','display:none;')
     invoiceGreed.append(btninvoicebtn);
 
 
 
-    interface InvoiceItem {
-        product_id: number;
-        product_name: string;
-        product_price: number;
-        product_img: string;
-        product_quantity: number; // Make product_quantity optional by adding "?"
-    }
+interface InvoiceItem {
+    product_id: number;
+    product_name: string;
+    product_price: number;
+    product_img: string;
+    product_quantity: number; // Make product_quantity optional by adding "?"
+}
 
 
     function invoiceCardgenerated(array: InvoiceItem[]): void {
         console.log(array);
+        btninvoicebtn.setAttribute('style','display:block;')
         const invoiceContainer = document.getElementById('invoicedata');
         if (!invoiceContainer) return;
         invoiceContainer.innerHTML = ''; // Clear previous cards
@@ -215,7 +207,7 @@ function make_invoice() {
     }
     btninvoicebtn.addEventListener('click', () => {
         console.log('Button Click', invoiceArray);
-        let product_qty: number = parseInt((<HTMLInputElement>document.getElementById('productQty')).value);
+        // let product_qty: number = parseInt((<HTMLInputElement>document.getElementById('productQty')).value);
         console.log(product_list);
 
 

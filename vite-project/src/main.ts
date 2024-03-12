@@ -28,6 +28,8 @@ class Register implements user {
     }
 }
 let last_user_id: number = 0
+
+//btnRegister
 document.getElementById('btnRegister')?.addEventListener('click', () => {
     let username = (<HTMLInputElement>document.getElementById('username')).value
     let email = (<HTMLInputElement>document.getElementById('email')).value
@@ -57,10 +59,10 @@ document.getElementById('btnRegister')?.addEventListener('click', () => {
         const passwordvalid: any = document.getElementById('validpassword')
         passwordvalid.innerHTML = ''
     }
-
     console.log(username);
     console.log(email);
     console.log(password);
+
     if (username, email, password) {
         last_user_id++
         const new_user = new Register(last_user_id, username, email, password)
@@ -68,8 +70,10 @@ document.getElementById('btnRegister')?.addEventListener('click', () => {
         user.push(new_user)
         localStorage.setItem('userlogin', JSON.stringify(user))
     }
+
 })
 
+// btnlogin
 document.getElementById('btnlogin')?.addEventListener('click', () => {
     let loginuser = (<HTMLInputElement>document.getElementById('loginuser')).value
     let loginpassword = (<HTMLInputElement>document.getElementById('loginpassword')).value
@@ -81,8 +85,6 @@ document.getElementById('btnlogin')?.addEventListener('click', () => {
         const loginuservalid: any = document.getElementById("validuserlogin")
         loginuservalid.innerHTML = " "
     }
-
-
     if (loginpassword == "") {
         const loginuserpass: any = document.getElementById("validuserpassword")
         loginuserpass.innerHTML = "Please Enter Password"
@@ -90,24 +92,26 @@ document.getElementById('btnlogin')?.addEventListener('click', () => {
         const loginuserpass: any = document.getElementById("validuserpassword")
         loginuserpass.innerHTML = ""
     }
-
     if (loginuser, loginpassword) {
-        const userinfo: any = JSON.parse(localStorage.getItem('userRegister') || '[]');
+        const userinfo: any = JSON.parse(localStorage.getItem('userlogin') || '[]');
+        console.log(userinfo);
+        
         userinfo.forEach((user: any) => {
             if (user.user_name === loginuser && user.user_password == loginpassword) {
                 alert('you are succesfully login')
-                let state_maintain:any=localStorage.setItem('login_maintaine',user.user_name)
+                let state_maintain: any = localStorage.setItem('login_maintaine', user.user_name)
                 console.log(state_maintain);
                 user_login()
             } else {
                 alert('Please Check your username & password')
             }
 
-
         });
     }
 })
-document.getElementById('btnlogout')?.addEventListener('click',()=>{
+
+// btnlogout
+document.getElementById('btnlogout')?.addEventListener('click', () => {
     localStorage.removeItem('login_maintaine')
     alert('Succesfully LogOut')
 })
