@@ -1,3 +1,4 @@
+import {product} from './InvoiceItem'
 document.addEventListener('DOMContentLoaded', () => {
     let user_name = localStorage.getItem('login_maintaine')
     console.log(user_name);
@@ -14,15 +15,6 @@ function make_invoice() {
     let product_list: product[] = JSON.parse(localStorage.getItem('product_list') || '[]');
     console.log(product_list);
 
-    // Define product interface
-    interface product {
-        product_id: number;
-        product_name: string;
-        product_img: string;
-        product_price: number;
-        product_qty: number;
-        product_category: string;
-    }
 
     // Define invoice array
     let invoiceArray: { product_id: number, product_name: string, product_price: number, product_img: string }[] = [];
@@ -82,7 +74,7 @@ function make_invoice() {
                     invoiceArray.push({ product_id, product_name, product_price, product_img });
                     console.log("Product added to invoice:", { product_id, product_name, product_price, product_img });                
                     invoiceCardgenerated(invoiceArray)
-
+                    
                 });
                 cardBodyDiv.appendChild(addToInvoiceBtn);
 
