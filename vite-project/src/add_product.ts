@@ -17,12 +17,14 @@ function product_info() {
 
     // Load product_list from local storage when the page loads
     window.addEventListener('DOMContentLoaded', () => {
-        const storedProducts = localStorage.getItem('product_list');
-        if (storedProducts) {
-            product_list = JSON.parse(storedProducts);
-            last_productId = product_list.length > 0 ? product_list[product_list.length - 1].product_id + 1 : 0;
-            show_data(); // Call the function to display the data
-        }
+        // const storedProducts = localStorage.getItem('product_list');
+        // if (storedProducts) {
+        //     product_list = JSON.parse(storedProducts);
+        //     last_productId = product_list.length > 0 ? product_list[product_list.length - 1].product_id + 1 : 0;
+        //     show_data(); // Call the function to display the data
+        // }
+        const show_product = new productTest()
+        show_product.show_product()
     });
 
     document.getElementById('addproductbtn')!.addEventListener('click', (e) => {
@@ -83,8 +85,12 @@ function product_info() {
         }
         if (product_categoty, product_name, product_price, product_qty, product_img_path) {
             const product_id: number = last_productId++;
-            const new_product = new productTest(product_id, product_name, product_img_path || '', product_price, product_qty, product_categoty);
-            product_list.push(new_product);
+            // const new_product = new productTest(product_id, product_name, product_img_path || '', product_price, product_qty, product_categoty);
+            // product_list.push(new_product);
+            const new_product =new productTest(product_id,product_categoty,product_name,product_price,product_qty,product_img_path)
+            new_product.add_product(product_categoty,product_name,product_price,product_qty,product_img_path || '')
+            alert('Product Add Succesfully')
+
         }
 
 
@@ -114,61 +120,14 @@ function product_info() {
             console.log("Category:", product.product_category);
             console.log("-------------------");
         }
-        show_data();
-        localStorage.setItem('product_list', JSON.stringify(product_list));
-        localStorage.setItem('last_productId', last_productId.toString());
+  
+        // localStorage.setItem('product_list', JSON.stringify(product_list));
+        // localStorage.setItem('last_productId', last_productId.toString());
 
 
        
     });
 
-    function show_data(): void {
-        let tbody = document.getElementById('table_data');
-        while (tbody?.hasChildNodes()) {
-            tbody.removeChild(tbody.firstChild!);
-        }
-        for (let i = 0; i < product_list.length; i++) {
-            const product = product_list[i];
-            if (product.product_qty >= 1) {
-                let tr: any = document.createElement('tr');
-
-                let id: any = document.createElement('td');
-                id.textContent = product.product_id;
-
-                let category: any = document.createElement('td');
-                category.textContent = product.product_category;
-
-                let img: any = document.createElement('td');
-                let imgElement = document.createElement('img');
-                imgElement.src = `/home/almas.shaikh/Desktop/2986-MohammadAlmas.S-24-Mobile/TypeScript/Project/vite-project/assets/${product.product_img}`;
-                imgElement.style.width = '100px'; // Set width
-                imgElement.style.height = '100px'; // Set height
-                img.append(imgElement);  // Append imgElement to the td
-
-                let name: any = document.createElement('td');
-                name.textContent = product.product_name;
-
-                let price: any = document.createElement('td');
-                price.textContent = product.product_price;
-
-                let qty: any = document.createElement('td');
-                qty.textContent = product.product_qty;
-
-                let updatebtn:any = document.createElement('button')
-                updatebtn.setAttribute('class','btn btn-primary')
-                updatebtn.textContent = 'update Details'
-
-                tr?.append(id);
-                tr?.append(category);
-                tr?.append(img); // Append img to the table row
-                tr?.append(name);
-                tr?.append(price);
-                tr?.append(qty);
-                tr?.append(updatebtn)
-                tbody?.append(tr);
-            }
-        }
-    }
 
     document.getElementById('showFormBtn')!.addEventListener("click", () => {
         const productForm = document.getElementById('productForm');
@@ -177,4 +136,52 @@ function product_info() {
         }
     });
 
+}
+
+export function show_data(product_list : any): void {
+    let tbody = document.getElementById('table_data');
+    while (tbody?.hasChildNodes()) {
+        tbody.removeChild(tbody.firstChild!);
+    }
+    for (let i = 0; i < product_list.length; i++) {
+        const product = product_list[i];
+        if (product.product_qty >= 1) {
+            let tr: any = document.createElement('tr');
+
+            let id: any = document.createElement('td');
+            id.textContent = product.product_id;
+
+            let category: any = document.createElement('td');
+            category.textContent = product.product_category;
+
+            let img: any = document.createElement('td');
+            let imgElement = document.createElement('img');
+            imgElement.src = `/home/almas.shaikh/Desktop/2986-MohammadAlmas.S-24-Mobile/TypeScript/Project/vite-project/assets/${product.product_img}`;
+            imgElement.style.width = '100px'; // Set width
+            imgElement.style.height = '100px'; // Set height
+            img.append(imgElement);  // Append imgElement to the td
+
+            let name: any = document.createElement('td');
+            name.textContent = product.product_name;
+
+            let price: any = document.createElement('td');
+            price.textContent = product.product_price;
+
+            let qty: any = document.createElement('td');
+            qty.textContent = product.product_qty;
+
+            let updatebtn:any = document.createElement('button')
+            updatebtn.setAttribute('class','btn btn-primary')
+            updatebtn.textContent = 'update Details'
+
+            tr?.append(id);
+            tr?.append(category);
+            tr?.append(img); // Append img to the table row
+            tr?.append(name);
+            tr?.append(price);
+            tr?.append(qty);
+            tr?.append(updatebtn)
+            tbody?.append(tr);
+        }
+    }
 }

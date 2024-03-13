@@ -49,11 +49,14 @@ document.getElementById('btnRegister')?.addEventListener('click', () => {
     console.log(password);
 
     if (username, email, password) {
-        last_user_id++
+        // // last_user_id++
         const new_user = new Register(last_user_id, username, email, password)
-        console.log(new_user);
-        user.push(new_user)
-        localStorage.setItem('userlogin', JSON.stringify(user))
+        new_user.adduser(username,email,password)
+        // console.log(new_user);
+        // user.push(new_user)
+        // localStorage.setItem('userlogin', JSON.stringify(user))
+
+        
     }
 
 })
@@ -78,32 +81,20 @@ document.getElementById('btnlogin')?.addEventListener('click', () => {
         loginuserpass.innerHTML = ""
     }
     if (loginuser, loginpassword) {
-        const userinfo: any = JSON.parse(localStorage.getItem('userlogin') || '[]');
-        console.log(userinfo);
-        
-        userinfo.forEach((user: any) => {
-            if (user.user_name === loginuser && user.user_password == loginpassword) {
-                alert('you are succesfully login')
-                let state_maintain: any = localStorage.setItem('login_maintaine', user.user_name)
-                console.log(state_maintain);
-                user_login()
-            } else {
-                alert('Please Check your username & password')
-            }
-
-        });
+        const new_user = new Register()
+        new_user.loginuser(loginuser,loginpassword)
     }
 })
 
 // btnlogout
 document.getElementById('btnlogout')?.addEventListener('click', () => {
-    localStorage.removeItem('login_maintaine')
-    alert('Succesfully LogOut')
+    const logout = new Register()
+    logout.logout()
 })
 
 
 
-function user_login() {
+export function user_login() {
     const invoiceArrayString = localStorage.getItem('invoiceArray');
     if (invoiceArrayString) {
         const invoiceArray = JSON.parse(invoiceArrayString);
