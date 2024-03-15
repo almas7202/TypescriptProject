@@ -109,7 +109,7 @@ interface InvoiceItem {
     product_img: string;
     product_quantity: number; // Make product_quantity optional by adding "?"
 }
-
+                           
 
     function invoiceCardgenerated(array: InvoiceItem[]): void {
         console.log(array);
