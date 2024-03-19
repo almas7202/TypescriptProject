@@ -1,43 +1,19 @@
+import { person } from "./vendor";
+import { consumerOperations } from "./consumer";
 
 export function consumer_sign_up() {
     // let data = { "status": "success", "data": [{ "id": 1, "employee_name": "Tiger Nixon", "employee_salary": 320800, "employee_age": 61, "profile_image": "" }]}
 
-    interface consumer {
-        cname: any
-        cAddress: any
-        cContact_no: any
-        cPincode: any
-        cEmail: any
-        cpassword: any
-    }
-
-    let condata:any;
-    try {
-        condata = localStorage.getItem("consumerSignupData")
-        
-        // console.log(1);
-        if(!condata){
-            console.log(1211); 
-            condata= []
-        }
-        else{
-            condata = JSON.parse(condata)
-        }
-        
-    }
-    catch {
-        condata = []
-        // console.log(2);
-        
-    }
-    // console.log((condata));
-    
+    let consumer = new consumerOperations()
+    let condata: person[]|[] = consumer.getData()
 
 
     let generate = document.getElementById("consumerGeneratePassword") as HTMLButtonElement
     let clear = document.getElementById("clear") as HTMLButtonElement
     clear.addEventListener("click", () => {
         console.log("hi");
+        let products = document.getElementById("productOfindex")
+        products?.classList.remove("hidden")
 
 
         let form = document.getElementById("myform") as HTMLFormElement
@@ -55,9 +31,6 @@ export function consumer_sign_up() {
 
 
     })
-
-
-
 
 
 
@@ -165,22 +138,22 @@ export function consumer_sign_up() {
 
 
 
-                let con: consumer = {
-                    "cname": name?.value,
-                    cAddress: Address?.value,
-                    cContact_no: Contact_no?.value,
-                    cPincode: Pincode?.value,
-                    cEmail: Email?.value,
-                    cpassword: conpw
-                }
-            
-                condata.push(con)
-                condata = JSON.stringify(condata)
-           
-                
-                localStorage.setItem("consumerSignupData",condata)
+                if(name?.value&&Address?.value&&Pincode?.value&&Email?.value){
+                    let currentConsumer: person = {
+                        name: name.value,
+                        address: Address.value,
+                        email: Email.value,
+                        contactNo: Number(Contact_no.value),
+                        password: conpw ,
+                        pincode: Number(Pincode.value),
+                        id: condata.length
+                    }
+                    console.log(currentConsumer);
+                    
+                    consumer.addData(currentConsumer)
+                    }
 
-               
+
             }
 
 

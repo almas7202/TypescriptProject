@@ -1,31 +1,9 @@
-
+import { person } from "./vendor";
+import { consumerOperations } from "./consumer";
 
 export function consumer_sign_in() {
-
-    let condata: any;
-    try {
-        condata = localStorage.getItem("consumerSignupData")
-
-        // console.log(1);
-        if (!condata) {
-            // console.log(1211);
-            condata = []
-        }
-        else {
-            condata = JSON.parse(condata)
-        }
-
-    }
-    catch {
-        condata = []
-        // console.log(2);
-
-    }
-
-    console.log(condata);
-
-
-
+    let consumer = new consumerOperations()
+    let condata: person[]|[] = consumer.getData()
 
 
     let email = document.getElementById("consumerInputEmailSignin") as HTMLInputElement
@@ -58,30 +36,34 @@ export function consumer_sign_in() {
             count = count + 1
         }
         if (count == 2) {
-            let flag = true;
-            for (let i of condata) {
-                let pw = i["cpassword"]
-                let email1 = i["cEmail"]
+            let flag = true 
+            let consumer = new consumerOperations()
+            let status = consumer.authenticate(email.value, password.value)
 
-                if (pw == password?.value && email1 == email?.value) {
-                    let loc = window.location.href.split("/")
-                    console.log(loc);
-                    
-                     window.location.href = loc[0]+"/"+loc[1]+"/"+loc[2]+"/"+"consumer.html"
-                     flag = false
+            if (status) {
+                console.log(status);
+                console.log(email.value);
+                console.log(password.value);
+                
+                
+                let loc = window.location.href.split("/")
+                console.log(loc);
+                localStorage.setItem("currentConsumer", JSON.stringify(status))
+                window.location.href = loc[0] + "/" + loc[1] + "/" + loc[2] + "/" + "consumer.html"
+                flag = false
+            }
+
+            if (flag) {
+                    let error = document.getElementById("consumerCheckPassword") as HTMLElement
+                    error.innerHTML = "Enter valid email and/or password"
+                }
+                else{
+                    let error = document.getElementById("consumerCheckPassword") as HTMLElement
+                    error.innerHTML = ""
+                    flag=true
+              
                 }
 
-            }
-            if (flag) {
-                let error = document.getElementById("consumerCheckPassword") as HTMLElement
-                error.innerHTML = "Enter valid email and/or password"
-            }
-            else{
-                let error = document.getElementById("consumerCheckPassword") as HTMLElement
-                error.innerHTML = ""
-                flag=true
-          
-            }
         }
     })
 
@@ -101,6 +83,8 @@ export function consumer_sign_in() {
     let clear = document.getElementById("clearConsumerSignin") as HTMLButtonElement
     clear.addEventListener("click", () => {
         console.log("hi");
+        let products = document.getElementById("productOfindex") 
+    products?.classList.remove("hidden")
         let generate = document.getElementById("consumerCheckPassword") as HTMLButtonElement
 
         let form = document.getElementById("myform2") as HTMLFormElement

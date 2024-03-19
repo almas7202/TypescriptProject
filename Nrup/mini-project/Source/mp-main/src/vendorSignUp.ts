@@ -1,49 +1,17 @@
-interface vendor {
-    vname: any,
-    vAddress: any,
-    vContact_no: any,
-    vpin_code: any,
-    vemail: any,
-    vpassword: any,
-    vshopName: any
-
-}
+import { vendorOperations } from './vendor'
+import { vendorInterface } from './vendor'
 export function vendor_sign_up() {
-
-
-    let vendata: any;
-    try {
-        vendata = localStorage.getItem("vendorSignupData")
-
-        console.log(1);
-        if (!vendata) {
-            // console.log(1211);
-            vendata = []
-        }
-        else {
-            vendata = JSON.parse(vendata)
-        }
-
-    }
-    catch {
-        vendata = []
-        // console.log(2);
-
-    }
-    // console.log((vendata));
-
-
-
-
-
-
-
+    let vendor = new vendorOperations()
+    let vendata: [] | vendorInterface[] = vendor.getData()
+    
 
     let generate = document.getElementById("vendorGeneratePassword") as HTMLCanvasElement
     let clear = document.getElementById("vendorclear") as HTMLButtonElement
     clear.addEventListener("click", (event) => {
         event.preventDefault()
         console.log("in");
+        let products = document.getElementById("productOfindex")
+        products?.classList.remove("hidden")
         let main = document.getElementById("vendorsignup")
         main?.setAttribute("class", "hidden login1")
 
@@ -182,19 +150,23 @@ export function vendor_sign_up() {
 
                 password.innerHTML = "Congratulation Your account is successfully created and your password is :" + conpw
 
-                let vendor: vendor = {
-                    vname: name?.value,
-                    vAddress: Address?.value,
-                    vContact_no: Contact_no?.value,
-                    vpin_code: Pincode?.value,
-                    vemail: Email?.value,
-                    vpassword: conpw,
-                    vshopName: shop?.value
-                };
-
-                vendata.push(vendor)
-                vendata = JSON.stringify(vendata)
-                localStorage.setItem("vendorSignupData", vendata)
+              
+                if(name?.value&&Address?.value&&Pincode?.value&&Email?.value&&shop?.value){
+                let currentVendor: vendorInterface = {
+                    shopname: shop.value,
+                    name: name.value,
+                    address: Address.value,
+                    email: Email.value,
+                    contactNo: Number(Contact_no.value),
+                    password: conpw ,
+                    pincode: Number(Pincode.value),
+                    id: vendata.length
+                }
+                console.log(currentVendor);
+                
+                vendor.addData(currentVendor)
+                }
+            
             }
 
 
