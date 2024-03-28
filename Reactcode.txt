@@ -1,0 +1,264 @@
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  type user_type = {
+    Name: string,
+    Email: string,
+    state: number,
+    city: number,
+    area: number,
+    gender: string,
+    // hobbies: string,
+  }
+  const [userForm, setuserForm] = useState<user_type>({
+    Name: "",
+    Email: "",
+    state: 0,
+    city: 0,
+    area: 0,
+    gender: "",
+    // hobbies: ""
+  })
+
+  const [citys, setCitys] = useState([])
+  const [area, setarealist] = useState([])
+  const [id, setid] = useState([])
+  const [userLists, setUserLists] = useState([])
+  // const [allchecked, setAllChecked] = useState([]);
+
+
+  // const handlechangeHobbies = (e:any) =>{
+  //   if(e.target.checked){
+  //     setAllChecked([...allchecked, e.target.value]);
+  //     setuserForm({...userForm,hobbies:e.target.value})
+  //   }else{
+  //     setAllChecked(allchecked.filter((item) => item !== e.target.value));
+  //   }
+  // }
+
+  const handleName = (e: any) => {
+    setuserForm({ ...userForm, Name: e.target.value })
+  }
+
+  const handleemail = (e: any) => {
+    setuserForm({ ...userForm, Email: e.target.value })
+    console.log(userForm);
+  }
+
+  const handlegender = (e: any) => {
+    setuserForm({ ...userForm, gender: e.target.value })
+  }
+
+  const handlestate = (e: any) => {
+    setuserForm({ ...userForm, state: e.target.value })
+    getcity(e.target.value)
+  }
+  const handlecity = (e: any) => {
+    setuserForm({ ...userForm, city: e.target.value })
+    getarea(e.target.value)
+  }
+
+  const handlearea = (e: any) => {
+    setuserForm({ ...userForm, area: e.target.value })
+  }
+
+  const getcity = (stateId: any) => {
+    const cityName = citylist.filter((city) => city.stateId == stateId)
+    console.log(cityName);
+    setCitys(cityName)
+  }
+
+  const getarea = (cityId: any) => {
+    const areaName = arealist.filter((area) => area.cityId == cityId)
+    console.log(areaName);
+    setarealist(areaName)
+  }
+
+  const handlesubmit = (e: any) => {
+    e.preventDefault()
+    setUserLists([...userLists, userForm])
+  }
+  console.log(userLists)
+
+  const handlereset = () => {
+    setuserForm({ ...userForm, State: 0 })
+  }
+
+
+
+
+  const statelist: { Id: number, Name: string }[] = [{ Id: 1, Name: 'Gujarat' }, { Id: 2, Name: 'MP' }, { Id: 3, Name: 'maharashtra' }, { Id: 4, Name: 'Panjab' }]
+  const citylist: { stateId: number, Id: number, Name: string }[] = [
+    { stateId: 1, Id: 1, Name: 'Ahmedabad' },
+    { stateId: 1, Id: 2, Name: 'Rajkot' },
+    { stateId: 1, Id: 3, Name: 'Himatnagar' },
+    { stateId: 2, Id: 4, Name: 'Bhopal' },
+    { stateId: 2, Id: 5, Name: 'Jablpur' },
+    { stateId: 3, Id: 6, Name: 'Mumbai' },
+    { stateId: 3, Id: 7, Name: 'Pune' },
+    { stateId: 3, Id: 8, Name: 'Navi Mumbai' },
+    { stateId: 4, Id: 9, Name: 'Pathankot' },
+    { stateId: 4, Id: 10, Name: 'Ludhiana' },
+    { stateId: 4, Id: 11, Name: 'Jalandhar' },
+    { stateId: 4, Id: 12, Name: 'Faridkot' },
+  ]
+  const arealist: { id: number, cityId: number, Name: string } = [
+    { id: 1, cityId: 1, Name: "Maninagar" },
+    { id: 2, cityId: 1, Name: "Low Garden" },
+    { id: 3, cityId: 2, Name: "Bhakti Nagar" },
+    { id: 4, cityId: 2, Name: "Prahlad Plot" },
+    { id: 5, cityId: 3, Name: "Adapur" },
+    { id: 6, cityId: 4, Name: "Bairagarh" },
+    { id: 7, cityId: 5, Name: "Rajul Township" },
+    { id: 8, cityId: 6, Name: "Dadar" },
+    { id: 9, cityId: 6, Name: "LinkIn Road" },
+    { id: 10, cityId: 7, Name: "Aundh" },
+    { id: 11, cityId: 7, Name: "Koregaon Park" },
+    { id: 12, cityId: 8, Name: "Airoli" },
+    { id: 13, cityId: 9, Name: "Sujanpur" },
+    { id: 14, cityId: 10, Name: "Samrala" },
+    { id: 15, cityId: 11, Name: "Kartarpur" },
+    { id: 16, cityId: 12, Name: 'Ahal' }
+  ]
+  console.log(userForm);
+
+
+  return (
+    <>
+      <div className="col-6">
+
+
+        <div className="container">
+          <form>
+            <div className="col-md-6">
+              <label htmlFor="Name">Name</label>
+              <input type="text" className='form-control' placeholder='Enter Name' onChange={(e) => { handleName(e) }} />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="email">Email</label>
+              <input type="email" className='form-control' placeholder='Enter Email' onChange={(e) => { handleemail(e) }} />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="Gender">Gender :</label>
+              <input className="form-check-input ml-2" type="radio" name="gender" value="male" onChange={(e) => { handlegender(e) }} />
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
+                Male
+              </label>
+              <input className="form-check-input" type="radio" name="gender" value="female" onChange={(e) => { handlegender(e) }} />
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
+                Female
+              </label>
+
+
+            </div>
+
+            {/* <div className="col-md-6">
+              <label htmlFor="Gender">Hobbies :</label>
+              <input className="form-check-input" type="checkbox" name="hobbies" value="Reading" onChange={(e) => {handlechangeHobbies(e)}} />
+              <label className="form-check-label">
+                Reading
+              </label>
+              <input className="form-check-input" type="checkbox" name="hobbies" value="Writing" onChange={(e) => {handlechangeHobbies(e)}} />
+              <label className="form-check-label">
+                Writing
+              </label>
+              <input className="form-check-input" type="checkbox" name="hobbies" value="GYM" onChange={(e) => {handlechangeHobbies(e)}} />
+              <label className="form-check-label">
+                GYM
+              </label>
+            </div> */}
+
+
+            <div className="col-md-6">
+              <label htmlFor="inputCity" className="form-label">State</label>
+              <select className="form-select" aria-label="Default select example" onChange={(e) => { handlestate(e) }}>
+                <option selected>Open this select menu</option>
+                {
+                  statelist.map((state, index) => {
+                    return (
+                      <option key={index} value={state.Id}>{state.Name}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+
+            <div className="col-md-6">
+              <label htmlFor="inputCity" className="form-label">City</label>
+              <select className="form-select" aria-label="Default select example" onChange={(e) => { handlecity(e) }}>
+                <option selected>Open this select menu</option>
+                {
+                  citys.map((city, index) => {
+                    return (
+                      <option key={index} value={city.Id}>{city.Name}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+
+            <div className="col-md-6">
+              <label htmlFor="inputCity" className="form-label">Area</label>
+              <select className="form-select" aria-label="Default select example" onChange={(e) => { handlearea(e) }}>
+                <option selected>Open this select menu</option>
+                {
+                  area.map((area, index) => {
+                    return (
+                      <option key={index} value={area.Id}>{area.Name}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+
+            <button className='btn btn-primary mt-2' onClick={(e) => handlesubmit(e)}>Submit</button>
+            <button className='btn btn-primary mt-2' onClick={() => handlereset()}>Reset</button>
+          </form>
+
+        </div>
+
+      <div className='col-6'>
+        <table border={2}>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Area</th>
+            <th>Action</th>
+          </tr>
+
+          <tbody>
+            {
+              userLists.map((user,index)=>{
+                return(
+                  <tr key={index}>
+                    <td>{user.Name}</td>
+                    <td>{user.Email}</td>
+                    <td>{user.gender}</td>
+                    <td>{user.state}</td>
+                    <td>{user.city}</td>
+                    <td>{user.area}</td>
+                    <td>
+                      <button className='Edit'>Edit</button>
+                      <button className='Delete'>Delete</button>
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </table>
+
+      </div>
+      </div>
+
+
+
+    </>
+  )
+}
+
+export default App
