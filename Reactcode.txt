@@ -115,6 +115,13 @@ function App() {
     setUserLists(updateuserlist)
   }
 
+  const updateuser =(user:user_type) =>{
+    console.log(user)
+    setuserForm(user)
+    
+   
+  
+  }
 
 
 
@@ -171,11 +178,11 @@ function App() {
               </div>
               <div className="col-md-6">
                 <label htmlFor="Gender">Gender :</label>
-                <input className="form-check-input ml-2"  type="radio" name="gender" value="male" onChange={(e) => { handlegender(e) }} />
+                <input className="form-check-input ml-2"  type="radio" name="gender" value="male" onChange={(e) => { handlegender(e) }} checked={userForm.gender=="male" ? true : false} />
                 <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Male
                 </label>
-                <input className="form-check-input" type="radio"  name="gender" value="female" onChange={(e) => { handlegender(e) }} />
+                <input className="form-check-input" type="radio"  name="gender" value="female" onChange={(e) => { handlegender(e) }} checked={userForm.gender=="female" ? true : false}/>
                 <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Female
                 </label>
@@ -274,7 +281,7 @@ function App() {
                         <td>{user.city}</td>
                         <td>{user.area}</td>
                         <td>
-                          <button className='btn btn-primary'>Edit</button>
+                          <button className='btn btn-primary' onClick={()=>updateuser(user)}>Edit</button>
                           <button className='btn btn-primary' onClick={()=> handledelete(user.id)}>Delete</button>
                           
                         </td>
