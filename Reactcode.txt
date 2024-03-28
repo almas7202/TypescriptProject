@@ -3,6 +3,7 @@ import './App.css'
 
 function App() {
   type user_type = {
+    id: number,
     Name: string,
     Email: string,
     state: number,
@@ -12,6 +13,7 @@ function App() {
     // hobbies: string,
   }
   const [userForm, setuserForm] = useState<user_type>({
+    id: 0,
     Name: "",
     Email: "",
     state: 0,
@@ -23,8 +25,8 @@ function App() {
 
   const [citys, setCitys] = useState([])
   const [area, setarealist] = useState([])
-  const [id, setid] = useState([])
   const [userLists, setUserLists] = useState([])
+  const [idcounter, setidcounter] = useState<number>(1)
   // const [allchecked, setAllChecked] = useState([]);
 
 
@@ -77,8 +79,19 @@ function App() {
 
   const handlesubmit = (e: any) => {
     e.preventDefault()
-    setUserLists([...userLists, userForm])
-  }
+    const newuser = { ...userForm, Id: idcounter }
+    setUserLists([...userLists, newuser])
+    setidcounter(idcounter + 1)
+    setuserForm({
+      id: idcounter + 1,
+      Name: "",
+      Email: "",
+      state: 0,
+      city: 0,
+      area: 0,
+      gender: ""
+    });
+  };
   console.log(userLists)
 
   const handlereset = () => {
@@ -126,34 +139,33 @@ function App() {
 
   return (
     <>
-      <div className="col-6">
+      <div className="container">
+        <div className="row">
+          <div className="col-6">
+            <form>
+              <div className="col-md-6">
+                <label htmlFor="Name">Name</label>
+                <input type="text" className='form-control' placeholder='Enter Name' onChange={(e) => { handleName(e) }} />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="email">Email</label>
+                <input type="email" className='form-control' placeholder='Enter Email' onChange={(e) => { handleemail(e) }} />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="Gender">Gender :</label>
+                <input className="form-check-input ml-2" type="radio" name="gender" value="male" onChange={(e) => { handlegender(e) }} />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Male
+                </label>
+                <input className="form-check-input" type="radio" name="gender" value="female" onChange={(e) => { handlegender(e) }} />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Female
+                </label>
 
 
-        <div className="container">
-          <form>
-            <div className="col-md-6">
-              <label htmlFor="Name">Name</label>
-              <input type="text" className='form-control' placeholder='Enter Name' onChange={(e) => { handleName(e) }} />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="email">Email</label>
-              <input type="email" className='form-control' placeholder='Enter Email' onChange={(e) => { handleemail(e) }} />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="Gender">Gender :</label>
-              <input className="form-check-input ml-2" type="radio" name="gender" value="male" onChange={(e) => { handlegender(e) }} />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Male
-              </label>
-              <input className="form-check-input" type="radio" name="gender" value="female" onChange={(e) => { handlegender(e) }} />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Female
-              </label>
+              </div>
 
-
-            </div>
-
-            {/* <div className="col-md-6">
+              {/* <div className="col-md-6">
               <label htmlFor="Gender">Hobbies :</label>
               <input className="form-check-input" type="checkbox" name="hobbies" value="Reading" onChange={(e) => {handlechangeHobbies(e)}} />
               <label className="form-check-label">
@@ -170,90 +182,95 @@ function App() {
             </div> */}
 
 
-            <div className="col-md-6">
-              <label htmlFor="inputCity" className="form-label">State</label>
-              <select className="form-select" aria-label="Default select example" onChange={(e) => { handlestate(e) }}>
-                <option selected>Open this select menu</option>
+              <div className="col-md-6">
+                <label htmlFor="inputCity" className="form-label">State</label>
+                <select className="form-select" aria-label="Default select example" onChange={(e) => { handlestate(e) }}>
+                  <option selected>Open this select menu</option>
+                  {
+                    statelist.map((state, index) => {
+                      return (
+                        <option key={index} value={state.Id}>{state.Name}</option>
+                      )
+                    })
+                  }
+                </select>
+              </div>
+
+              <div className="col-md-6">
+                <label htmlFor="inputCity" className="form-label">City</label>
+                <select className="form-select" aria-label="Default select example" onChange={(e) => { handlecity(e) }}>
+                  <option selected>Open this select menu</option>
+                  {
+                    citys.map((city, index) => {
+                      return (
+                        <option key={index} value={city.Id}>{city.Name}</option>
+                      )
+                    })
+                  }
+                </select>
+              </div>
+
+              <div className="col-md-6">
+                <label htmlFor="inputCity" className="form-label">Area</label>
+                <select className="form-select" aria-label="Default select example" onChange={(e) => { handlearea(e) }}>
+                  <option selected>Open this select menu</option>
+                  {
+                    area.map((area, index) => {
+                      return (
+                        <option key={index} value={area.Id}>{area.Name}</option>
+                      )
+                    })
+                  }
+                </select>
+              </div>
+
+              <button className='btn btn-primary mt-2' onClick={(e) => handlesubmit(e)}>Submit</button>
+              <button className='btn btn-primary mt-2' onClick={() => handlereset()}>Reset</button>
+            </form>
+          </div>
+
+          <div className="col-6">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">State</th>
+                  <th scope="col">City</th>
+                  <th scope="col">Area</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
                 {
-                  statelist.map((state, index) => {
+                  userLists.map((user, index) => {
                     return (
-                      <option key={index} value={state.Id}>{state.Name}</option>
+                      <tr key={index}>
+                        <td>{user.id}</td>
+                        <td>{user.Name}</td>
+                        <td>{user.Email}</td>
+                        <td>{user.gender}</td>
+                        <td>{user.state}</td>
+                        <td>{user.city}</td>
+                        <td>{user.area}</td>
+                        <td>
+                          <button className='btn btn-primary'>Edit</button>
+                          <button className='btn btn-primary'>Delete</button>
+                        </td>
+                      </tr>
                     )
                   })
                 }
-              </select>
-            </div>
-
-            <div className="col-md-6">
-              <label htmlFor="inputCity" className="form-label">City</label>
-              <select className="form-select" aria-label="Default select example" onChange={(e) => { handlecity(e) }}>
-                <option selected>Open this select menu</option>
-                {
-                  citys.map((city, index) => {
-                    return (
-                      <option key={index} value={city.Id}>{city.Name}</option>
-                    )
-                  })
-                }
-              </select>
-            </div>
-
-            <div className="col-md-6">
-              <label htmlFor="inputCity" className="form-label">Area</label>
-              <select className="form-select" aria-label="Default select example" onChange={(e) => { handlearea(e) }}>
-                <option selected>Open this select menu</option>
-                {
-                  area.map((area, index) => {
-                    return (
-                      <option key={index} value={area.Id}>{area.Name}</option>
-                    )
-                  })
-                }
-              </select>
-            </div>
-
-            <button className='btn btn-primary mt-2' onClick={(e) => handlesubmit(e)}>Submit</button>
-            <button className='btn btn-primary mt-2' onClick={() => handlereset()}>Reset</button>
-          </form>
-
+              </tbody>
+            </table>
+          </div>
         </div>
-
-      <div className='col-6'>
-        <table border={2}>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>State</th>
-            <th>City</th>
-            <th>Area</th>
-            <th>Action</th>
-          </tr>
-
-          <tbody>
-            {
-              userLists.map((user,index)=>{
-                return(
-                  <tr key={index}>
-                    <td>{user.Name}</td>
-                    <td>{user.Email}</td>
-                    <td>{user.gender}</td>
-                    <td>{user.state}</td>
-                    <td>{user.city}</td>
-                    <td>{user.area}</td>
-                    <td>
-                      <button className='Edit'>Edit</button>
-                      <button className='Delete'>Delete</button>
-                    </td>
-                  </tr>
-                )
-              })
-            }
-          </tbody>
-        </table>
-
       </div>
-      </div>
+
+
+
 
 
 
